@@ -1,0 +1,34 @@
+body {
+  font-family: Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
+    monospace, Arial, Helvetica, sans-serif;
+  background-color: aliceblue;
+}
+
+#content {
+  margin: 0 auto;
+  max-width: 1000px;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: row;
+}
+
+#panel-1 {
+  flex: 1;
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+
+#panel-2 {
+  flex: 1;
+  padding: 20px;
+}
+.path {
+}
+.param-required {
+  color: red;
+}
+
+#path-selected {
+  color: red;
+  font-weight: bold;
+}
