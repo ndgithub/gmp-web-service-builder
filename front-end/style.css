@@ -1,5 +1,5 @@
 body {
-  font-family: Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
+  font-family: Arial, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
     monospace, Arial, Helvetica, sans-serif;
   background-color: aliceblue;
 }
@@ -10,20 +10,29 @@ body {
   padding: 0 20px;
   display: flex;
   flex-direction: row;
+  border: 2px solid black;
 }
 
-#panel-1 {
-  flex: 1;
-  background-color: #f1f1f1;
-  padding: 20px;
+#urls {
+  width: 250px;
+  background-color: #e1e1e1;
 }
 
-#panel-2 {
-  flex: 1;
-  padding: 20px;
+.header {
+  background-color: #c1c1c1;
 }
+
+#requests {
+  width: 250px;
+  background-color: blue;
+}
+
+.request {
+}
+
 .path {
 }
+
 .param-required {
   color: red;
 }
@@ -31,4 +40,14 @@ body {
 #path-selected {
   color: red;
   font-weight: bold;
+}
+#required {
+  background-color: #c1c1c1;
+}
+#optional {
+  background-color: #e1e1e1;
+}
+
+.grey {
+  color: #c1c1c1;
 }
