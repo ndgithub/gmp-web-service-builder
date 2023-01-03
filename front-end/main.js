@@ -31,64 +31,41 @@ function init() {
     console.log(state.paths);
     // iterate through paths array and create a div for each and set a data attribute to the index of the path
     for (let i = 0; i < state.paths.length; i++) {
-      let div = document.createElement('div');
-      div.setAttribute('data-id', i);
-      div.setAttribute('class', 'path');
-      div.innerHTML = state.paths[i].operationId;
+      let pathDiv = document.createElement('div');
+      pathDiv.setAttribute('data-id', i);
+      pathDiv.setAttribute('class', 'path');
+      pathDiv.innerHTML = state.paths[i].operationId;
       // add a click event listener to each which creates a new Request object and adds it to the requests array
-      div.addEventListener('click', (e) => {
-        let request = new Request(e.target.dataset.id);
-
+      pathDiv.addEventListener('click', (e) => {
+        let request = new Request(state.paths[e.target.dataset.id]);
+        console.log(request);
         state.addRequest(request);
-        console.log(state.requests);
         updateRequestsUi(state);
       });
-      apis.appendChild(div);
+      apis.appendChild(pathDiv);
     }
   }
 
   function updateRequestsUi(state) {
-    // loop through requests array, create a div for each request, and append it to the requests div
     // also, if a request is open, show the query parameters
     let requestsDiv = document.getElementById('requests');
-    console.log('hi');
     requestsDiv.innerHTML = '';
-    console.log(JSON.stringify(state.requests));
     for (let i = 0; i < state.requests.length; i++) {
-      let requestDiv = document.createElement('div');
-      requestDiv.setAttribute('class', 'request');
-      //requestDiv.innerHTML = paths[requests[i].pathIndex].operationId;
+      let request = state.requests[i];
+
+      let requestDiv = createRequestDiv(request);
       requestsDiv.appendChild(requestDiv);
       // if a request isOpen, show the query parameters
 
-      let headerDiv = document.createElement('div');
-      headerDiv.setAttribute('class', 'header');
-      headerDiv.innerHTML =
-        state.paths[state.requests[i].pathIndex].operationId;
-      requestDiv.appendChild(headerDiv);
-      headerDiv.addEventListener('click', (e) => {
-        console.log(e.target);
-        state.requests[i].isOpen = !state.requests[i].isOpen;
-        console.log(state.requests);
-        updateRequestsUi(state);
-      });
-
-      if (state.requests[i].isOpen) {
-        console.log(state.requests[i]);
-
-        requestDiv.appendChild(headerDiv);
+      if (request.isOpen) {
         let paramsDiv = document.createElement('div');
         paramsDiv.setAttribute('class', 'params');
+        let params = request.params;
         //grab the query parameters, and create a param div for each, then insert it into the params div
-        for (
-          let j = 0;
-          j < state.paths[state.requests[i].pathIndex].queryParams.length;
-          j++
-        ) {
-          let paramDiv = document.createElement('div');
-          paramDiv.setAttribute('class', 'param');
-          paramDiv.innerHTML =
-            state.paths[state.requests[i].pathIndex].queryParams[j].name;
+        for (let j = 0; j < params.length; j++) {
+          // create a param div and
+          let param = params[j];
+          let paramDiv = createParamDiv(param);
           paramsDiv.appendChild(paramDiv);
         }
         requestDiv.appendChild(paramsDiv);
@@ -97,7 +74,56 @@ function init() {
       }
     }
 
-    function updateSingleRequestUi() {}
+    function createRequestDiv(request) {
+      let requestDiv = document.createElement('div');
+      requestDiv.setAttribute('class', 'request');
+      console.log(requestDiv);
+      let headerDiv = document.createElement('div');
+      headerDiv.setAttribute('class', 'header');
+      headerDiv.addEventListener('click', (e) => {
+        console.log(e.target);
+        request.isOpen = !request.isOpen;
+        updateRequestsUi(state);
+      });
+
+      let nameDiv = document.createElement('div');
+      nameDiv.setAttribute('class', 'name');
+      nameDiv.innerHTML = request.operationId;
+      headerDiv.appendChild(nameDiv);
+
+      let urlDiv = document.createElement('div');
+      urlDiv.setAttribute('class', 'url');
+      urlDiv.innerHTML = request.serverUrl;
+      headerDiv.appendChild(urlDiv);
+      console.log(requestDiv);
+
+      requestDiv.appendChild(headerDiv);
+      return requestDiv;
+    }
+
+    function createParamDiv(param) {
+      let paramDiv = document.createElement('div');
+      paramDiv.setAttribute('class', 'param');
+
+      // paramDiv.innerHTML = paramName;
+      // create a label and input for each param
+      let label = document.createElement('label');
+      label.setAttribute('for', param.name);
+      label.setAttribute('class', 'param-label');
+      label.innerHTML = param.name;
+      let input = document.createElement('input');
+      input.setAttribute('type', 'text');
+      input.setAttribute('id', param.name);
+      input.setAttribute('name', param.name);
+      input.setAttribute('class', 'param-input');
+
+      input.setAttribute('value', param.value);
+
+      paramDiv.appendChild(label);
+      paramDiv.appendChild(input);
+
+      return paramDiv;
+    }
   }
   //   let requiredParams = [];
   //   let optionalParams = [];
