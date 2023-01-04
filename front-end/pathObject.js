@@ -31,3 +31,5 @@
 //     console.log(key, path[key]);
 //   }
 // }
+
+// // logs all of the state object properties

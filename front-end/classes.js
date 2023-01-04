@@ -11,17 +11,38 @@ class Path {
 }
 
 class Request {
-  constructor(path) {
+  constructor(path, index) {
+    this.index = index;
     this.operationId = path.operationId;
     this.serverUrl = path.serverUrl;
     this.pathString = path.pathString;
     this.endpoint = path.endpoint;
+    this.completeUrl;
     //create queryParam array from Path object, and add a value property to each param.
     this.params = path.params.map((param) => {
       param.value = '';
       return param;
     });
     this.isOpen = true;
+  }
+
+  getCompleteUrl() {
+    let completeUrl = this.serverUrl + this.endpoint;
+    let params = this.params;
+    for (let i = 0; i < params.length; i++) {
+      let param = params[i];
+      if (param.value) {
+        //if this is the first param, add a ? to the url
+        if (i === 0) {
+          completeUrl += '?';
+        } else {
+          //otherwise add an & to the url
+          completeUrl += '&';
+        }
+        completeUrl += param.name + '=' + param.value;
+      }
+    }
+    return completeUrl;
   }
 }
 

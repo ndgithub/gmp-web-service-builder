@@ -4,8 +4,8 @@
 import { Request } from './classes.js';
 
 class Controller {
-  constructor(model, view) {
-    this.model = model;
+  constructor(state, view) {
+    this.state = state;
     this.view = view;
   }
 
@@ -16,18 +16,16 @@ class Controller {
       this.onInputChange.bind(this)
     );
     this.view.updatePathsUi();
-
-    // iterate through paths array and create a div for each and set a data attribute to the index of the path
   }
 
   onPathClick(e) {
     // create a new Request object and add it to the requests array
-    let request = new Request(this.model.paths[e.target.dataset.id]);
+    let path = this.state.paths[e.target.dataset.id];
+    let request = new Request(path);
     console.log(request);
-    this.model.addRequest(request);
-    console.log(this.model);
+    this.state.addRequest(request);
     //update the requests ui
-    this.view.updateRequestsUi();
+    this.view.updateRequestsUi(request);
   }
 
   onHeaderClick(e, request) {
@@ -37,10 +35,11 @@ class Controller {
     this.view.updateRequestsUi();
   }
 
-  onInputChange(e, param) {
+  onInputChange(e, param, request) {
     console.log('input changed');
     console.log(e.target.value);
     param.value = e.target.value;
+    this.view.updateRequestActualUrl(request);
   }
 }
 

@@ -4,7 +4,7 @@ import { Path } from './classes.js';
 // It handles all the data manipulation and state changes.
 // It is the only class that can directly modify the state.
 
-class Model {
+class State {
   constructor(paths, excludedPaths) {
     this.paths = paths;
     this.excludedPaths = excludedPaths;
@@ -23,4 +23,4 @@ class Model {
   }
 }
 
-export { Model };
+export { State };
