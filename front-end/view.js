@@ -23,7 +23,7 @@ class View {
     }
   }
 
-  updateRequestsUi() {
+  updateRequestsUi(focusTarget) {
     let requestsDiv = document.getElementById('requests');
     requestsDiv.innerHTML = '';
     for (let i = 0; i < this.model.requests.length; i++) {
@@ -39,13 +39,17 @@ class View {
         for (let j = 0; j < params.length; j++) {
           // create a param div and
           let param = params[j];
-          let paramDiv = this.createParamDiv(param);
+          //   let paramDiv = this.createParamDiv(param, request.params.indexOf( ));
           paramsDiv.appendChild(paramDiv);
         }
         requestDiv.appendChild(paramsDiv);
 
         // create a header div and append it to the requests div
       }
+    }
+    if (focusTarget) {
+      focusTarget.focus();
+      console.log(focusTarget);
     }
   }
 
@@ -66,11 +70,14 @@ class View {
 
     let urlDiv = document.createElement('div');
     urlDiv.setAttribute('class', 'url');
-    console.log(request.pathString);
     urlDiv.innerHTML = request.serverUrl + request.endpoint;
-    console.log(request);
+    for (let i = 0; i < request.params.length; i++) {
+      let param = request.params[i];
+      if (param.value) {
+        urlDiv.innerHTML += `&${param.name}=${param.value}`;
+      }
+    }
     headerDiv.appendChild(urlDiv);
-    console.log(requestDiv);
 
     requestDiv.appendChild(headerDiv);
     return requestDiv;
@@ -91,6 +98,7 @@ class View {
     input.setAttribute('id', param.name);
     input.setAttribute('name', param.name);
     input.setAttribute('class', 'param-input');
+    input.tabIndex = 0;
     // add a listener on the input for change and update the param value
     input.addEventListener('input', (e) =>
       this.controllerCallbacks.inputChange(e, param)

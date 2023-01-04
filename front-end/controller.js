@@ -38,9 +38,13 @@ class Controller {
   }
 
   onInputChange(e, param) {
-    console.log('input changed');
-    console.log(e.target.value);
     param.value = e.target.value;
+    console.log(param.name + param.value);
+    // update the model so that the request object has actualRequest
+    this.model.updateRequestActualUrl(param);
+    this.view.updateRequestActualUrl();
+    e.target.focus();
+    e.target.select();
   }
 }
 

@@ -16,6 +16,7 @@ class Request {
     this.serverUrl = path.serverUrl;
     this.pathString = path.pathString;
     this.endpoint = path.endpoint;
+    this.actualRequest = '';
     //create queryParam array from Path object, and add a value property to each param.
     this.params = path.params.map((param) => {
       param.value = '';
