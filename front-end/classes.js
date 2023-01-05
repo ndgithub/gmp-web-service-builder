@@ -18,11 +18,15 @@ class Request {
     this.pathString = path.pathString;
     this.endpoint = path.endpoint;
     this.completeUrl;
-    //create queryParam array from Path object, and add a value property to each param.
+    //create a copy of each object in path.params and store it in this.params
     this.params = path.params.map((param) => {
-      param.value = '';
-      return param;
+      return new Param(param.name, '');
     });
+
+    // this.params = path.params.map((param) => {
+    //   param.value = '';
+    //   return param;
+    // });
     this.isOpen = true;
   }
 

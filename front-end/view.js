@@ -38,7 +38,19 @@ class View {
       if (request.isOpen) {
         let paramsDiv = document.createElement('div');
         let params = request.params;
+        //sort params so that required params are first
+        params.sort((a, b) => {
+          if (a.required && !b.required) {
+            return -1;
+          } else if (!a.required && b.required) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
+
         for (let j = 0; j < params.length; j++) {
+          console.log(params[j]);
           // create a param div and
           let param = params[j];
           // get index of request in requests array
@@ -66,7 +78,7 @@ class View {
     let nameDiv = document.createElement('div');
     nameDiv.setAttribute('class', 'name');
     nameDiv.innerHTML = request.operationId;
-    headerDiv.appendChild(nameDiv);
+    //headerDiv.appendChild(nameDiv);
 
     let urlDiv = document.createElement('div');
     urlDiv.setAttribute('class', 'url');
@@ -107,12 +119,12 @@ class View {
       this.state.requests.indexOf(request)
     );
     console.log(this.state.requests.indexOf(request));
-    // add a listener on the input for change and update the param value
+
+    console.log(param.value);
+    input.setAttribute('value', param.value);
     input.addEventListener('input', (e) =>
       this.controllerCallbacks.inputChange(e, param, request)
     );
-
-    input.setAttribute('value', param.value);
 
     paramDiv.appendChild(label);
     paramDiv.appendChild(input);
@@ -121,13 +133,16 @@ class View {
   }
 
   updateRequestActualUrl(request) {
-    console.log(request);
+    // console.log(this.state.requests);
     //build the actual url of the path of the web service request using the serverUrl, endpoint and query parameters name and values using the request object
 
     let urlDiv = document.querySelector(
       `[data-request-index="${this.state.requests.indexOf(request)}"]`
     );
+    console.log(urlDiv);
+    console.log(this.state.requests.indexOf(request));
     urlDiv.innerHTML = request.getCompleteUrl();
+    // console.log(this.state.requests);
   }
 }
 

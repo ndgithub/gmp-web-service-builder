@@ -22,7 +22,7 @@ class Controller {
     // create a new Request object and add it to the requests array
     let path = this.state.paths[e.target.dataset.id];
     let request = new Request(path);
-    console.log(request);
+    console.log(this.state);
     this.state.addRequest(request);
     //update the requests ui
     this.view.updateRequestsUi(request);
@@ -32,13 +32,18 @@ class Controller {
     console.log('header clicked');
     console.log(e.target);
     request.isOpen = !request.isOpen;
-    this.view.updateRequestsUi();
+    this.view.updateRequestsUi(request);
   }
 
   onInputChange(e, param, request) {
+    console.log(this.state.requests); // Everything is good at this point
+
     console.log('input changed');
     console.log(e.target.value);
-    param.value = e.target.value;
+    param.value = e.target.value; // this is adding the value to every param that is the same path
+    //
+
+    console.log(this.state.requests);
     this.view.updateRequestActualUrl(request);
   }
 }
