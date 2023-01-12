@@ -11,15 +11,15 @@ if (port == null || port == '') {
 const __dirname = process.cwd();
 let data = {};
 
-let url =
-  'https://raw.githubusercontent.com/googlemaps/openapi-specification/main/dist/google-maps-platform-openapi3.json';
-
 //
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
 // serve the front-end folder as static files
 app.use(express.static('front-end'));
+
+let url =
+  'https://raw.githubusercontent.com/googlemaps/openapi-specification/main/dist/google-maps-platform-openapi3.json';
 
 axios.get(url).then((response) => {
   data = response.data;
