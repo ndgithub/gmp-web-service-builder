@@ -29,6 +29,7 @@ body {
   font-weight: lighter;
   border: 1px solid #c1c1c1;
   border-radius: 4px;
+  background-color: #eeeeef;
 }
 
 .header {
@@ -49,7 +50,7 @@ body {
 }
 
 .request .name {
-  font-size: 0.8em;
+  font-size: 1em;
   padding: 10px;
   display: inline;
 }
@@ -58,11 +59,11 @@ body {
   padding: 10px;
 }
 .path {
-  font-size: 1.2em;
+  font-size: 1em;
 }
 .path:hover {
-  font-size: 1.2em;
   cursor: pointer;
+  font-weight: bold;
 }
 
 .grey {

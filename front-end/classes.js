@@ -47,6 +47,7 @@ class Request {
         completeUrl += param.name + '=' + param.value;
       }
     }
+    completeUrl += '&key=';
     return encodeURI(completeUrl);
   }
 }
