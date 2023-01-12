@@ -1,71 +1,121 @@
+:root {
+  --main-bg-color: white;
+  --input-field-bg-color: #eeeeee;
+  --darker-bg-color: #e8eaed;
+}
+
 body {
-  font-family: Arial, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
-    monospace, Arial, Helvetica, sans-serif;
-  background-color: aliceblue;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  background-color: var(--darker-bg-color);
 }
 
 #content {
   margin: 0 auto;
   max-width: 1000px;
-  padding: 0 20px;
+  padding-right: 20px;
   display: flex;
   flex-direction: row;
-  border: 2px solid black;
+  overflow: auto;
+  background-color: var(--main-bg-color);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
 }
 
-#urls {
-  background-color: #e1e1e1;
+.url {
+  /* Todo: make the url wrap so you don't have to horizontal scroll */
+  font-family: Roboto Mono, Menlo, monaco, monospace;
+  overflow-wrap: anywhere;
+  background-color: #283142;
+  color: #ff8bcb;
+  font-size: 14px;
+  padding: 10px;
+  font-weight: lighter;
+  border-radius: 4px;
 }
 
 .header {
-  background-color: #c1c1c1;
-  padding: 8px;
+  /* border: 1px solid #cccccc;
+  border-bottom: none;
+  border-radius: 5px; */
+  padding-right: 20px;
+  margin: 10px;
+  margin-bottom: 0px;
+  width: 100%;
 }
 
 #requests {
-  /* add nice blue brown color combo */
-  border: 1px solid blue;
+  border-radius: 5px;
+  width: 100%;
 }
 
 .request {
-  border: 1px solid red;
-  padding: 4px;
+  background-color: #f1f3f4;
+  margin-bottom: 20px;
 }
 
+.request .name {
+  font-size: 0.8em;
+  padding: 10px;
+  display: inline;
+}
+
+#paths {
+  padding: 10px;
+}
 .path {
-  font-weight: bold;
   font-size: 1.2em;
 }
-
-.param-required {
-  color: red;
-}
-
-#path-selected {
-  color: red;
-  font-weight: bold;
-}
-#required {
-  background-color: #c1c1c1;
-}
-#optional {
-  background-color: #e1e1e1;
+.path:hover {
+  font-size: 1.2em;
+  cursor: pointer;
 }
 
 .grey {
   color: #c1c1c1;
 }
+
 .params {
   width: 100%;
-  background-color: #eeeeff;
+  /* create a border except on top */
+  /* border: 1px solid #cccccc;
+  border-top: none;
+  border-radius: 5px; */
+  margin: 10px;
+  margin-top: 0px;
 }
+
 .param {
   width: 500px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
-input {
+
+.param label {
+  display: flex;
+  flex-direction: column;
+  padding: 2px;
+}
+.param input {
   border: none;
-  background-color: #dceeff;
+  padding: 2px;
+  margin: 5px 0;
+  background-color: var(--input-field-bg-color);
 }
+
 label.param-label {
   display: block;
+}
+
+.triangle {
+  display: inline;
+  font-size: 0.8em;
+}
+
+.click {
+  cursor: pointer;
+  font-weight: normal;
+}
+
+.click:hover {
+  font-weight: bold;
 }

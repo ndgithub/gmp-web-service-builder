@@ -5,9 +5,9 @@ class View {
     this.requestsDiv = document.getElementById('requests');
     this.controllerCallbacks = {};
   }
-  loadCallbacks(onPathClick, onHeaderClick, onInputChange) {
+  loadCallbacks(onPathClick, onNameClick, onInputChange) {
     this.controllerCallbacks.pathClick = onPathClick;
-    this.controllerCallbacks.headerClick = onHeaderClick;
+    this.controllerCallbacks.onNameClick = onNameClick;
     this.controllerCallbacks.inputChange = onInputChange;
   }
 
@@ -24,7 +24,7 @@ class View {
     }
   }
 
-  updateRequestsUi(request) {
+  updateRequestsUi() {
     console.log('updateRequestsUi');
     let requestsDiv = document.getElementById('requests');
     requestsDiv.innerHTML = '';
@@ -32,13 +32,16 @@ class View {
       let request = this.state.requests[i];
 
       let requestDiv = this.createRequestDiv(request);
+      requestDiv.classList.add('request');
       requestsDiv.appendChild(requestDiv);
       // if a request isOpen, show the query parameters
-
+      console.log(request);
       if (request.isOpen) {
         let paramsDiv = document.createElement('div');
+        paramsDiv.setAttribute('class', 'params');
         let params = request.params;
         //sort params so that required params are first
+        console.log(params);
         params.sort((a, b) => {
           if (a.required && !b.required) {
             return -1;
@@ -51,7 +54,6 @@ class View {
 
         for (let j = 0; j < params.length; j++) {
           console.log(params[j]);
-          // create a param div and
           let param = params[j];
           // get index of request in requests array
           let paramDiv = this.createParamDiv(param, request);
@@ -69,16 +71,32 @@ class View {
     let requestDiv = document.createElement('div');
     requestDiv.setAttribute('class', 'request');
     console.log(requestDiv);
+    //create a div to hold the triangle and the name
+    let clickDiv = document.createElement('div');
+    clickDiv.setAttribute('class', 'click');
+    let triangleDiv = document.createElement('div');
+    triangleDiv.setAttribute('class', 'triangle');
+    if (request.isOpen) {
+      triangleDiv.innerHTML = '▼';
+    } else {
+      triangleDiv.innerHTML = '▶';
+    }
+    //add trianlge div to click div
+    clickDiv.appendChild(triangleDiv);
+
     let headerDiv = document.createElement('div');
-    headerDiv.setAttribute('class', 'header');
-    headerDiv.addEventListener('click', (e) =>
-      this.controllerCallbacks.headerClick(e, request)
-    );
+    headerDiv.classList.add('class', 'header');
 
     let nameDiv = document.createElement('div');
     nameDiv.setAttribute('class', 'name');
     nameDiv.innerHTML = request.operationId;
-    //headerDiv.appendChild(nameDiv);
+
+    clickDiv.appendChild(nameDiv);
+    clickDiv.addEventListener('click', (e) =>
+      this.controllerCallbacks.onNameClick(e, request)
+    );
+    headerDiv.appendChild(clickDiv);
+    // create a div to the left of nameDiv that will show a triangle pointing down if the request is open and a triangle pointing right if the request is closed
 
     let urlDiv = document.createElement('div');
     urlDiv.setAttribute('class', 'url');
@@ -107,7 +125,7 @@ class View {
     let label = document.createElement('label');
     label.setAttribute('for', param.name);
     label.setAttribute('class', 'param-label');
-    label.innerHTML = param.name;
+    label.innerHTML = param.name + ' = ';
     let input = document.createElement('input');
     input.setAttribute('type', 'text');
     input.setAttribute('id', param.name);

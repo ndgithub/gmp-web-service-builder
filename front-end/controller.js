@@ -12,7 +12,7 @@ class Controller {
   start() {
     this.view.loadCallbacks(
       this.onPathClick.bind(this),
-      this.onHeaderClick.bind(this),
+      this.onNameClick.bind(this),
       this.onInputChange.bind(this)
     );
     this.view.updatePathsUi();
@@ -28,8 +28,8 @@ class Controller {
     this.view.updateRequestsUi(request);
   }
 
-  onHeaderClick(e, request) {
-    console.log('header clicked');
+  onNameClick(e, request) {
+    console.log('name clicked');
     console.log(e.target);
     request.isOpen = !request.isOpen;
     this.view.updateRequestsUi(request);
@@ -41,7 +41,6 @@ class Controller {
     console.log('input changed');
     console.log(e.target.value);
     param.value = e.target.value; // this is adding the value to every param that is the same path
-    //
 
     console.log(this.state.requests);
     this.view.updateRequestActualUrl(request);

@@ -22,5 +22,4 @@ class State {
     this.excludedPaths = excludedPaths;
   }
 }
-
 export { State };

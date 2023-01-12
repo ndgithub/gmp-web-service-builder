@@ -20,7 +20,8 @@ class Request {
     this.completeUrl;
     //create a copy of each object in path.params and store it in this.params
     this.params = path.params.map((param) => {
-      return new Param(param.name, '');
+      console.log({ ...param });
+      return new Param(param, '');
     });
 
     // this.params = path.params.map((param) => {
@@ -46,13 +47,16 @@ class Request {
         completeUrl += param.name + '=' + param.value;
       }
     }
-    return completeUrl;
+    return encodeURI(completeUrl);
   }
 }
 
 class Param {
-  constructor(name, value) {
-    this.name = name;
+  constructor(param, value) {
+    this.name = param.name;
+    this.description = param.description;
+    this.description = param.description;
+    this.required = param.required;
     this.value = value;
   }
 }
