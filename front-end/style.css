@@ -21,22 +21,18 @@ body {
 }
 
 .url {
-  /* Todo: make the url wrap so you don't have to horizontal scroll */
   font-family: Roboto Mono, Menlo, monaco, monospace;
   overflow-wrap: anywhere;
-  background-color: #283142;
-  color: #ff8bcb;
+  /* color: #ff8bcb; */
   font-size: 14px;
   padding: 10px;
   font-weight: lighter;
+  border: 1px solid #c1c1c1;
   border-radius: 4px;
 }
 
 .header {
-  /* border: 1px solid #cccccc;
-  border-bottom: none;
-  border-radius: 5px; */
-  padding-right: 20px;
+  padding: 10px 20px 10px 0px;
   margin: 10px;
   margin-bottom: 0px;
   width: 100%;
@@ -48,7 +44,7 @@ body {
 }
 
 .request {
-  background-color: #f1f3f4;
+  background-color: #f5f5fc;
   margin-bottom: 20px;
 }
 
@@ -97,9 +93,10 @@ body {
 }
 .param input {
   border: none;
+  border-bottom: 1px solid #cccccc;
   padding: 2px;
   margin: 5px 0;
-  background-color: var(--input-field-bg-color);
+  background-color: #ffffff00;
 }
 
 label.param-label {

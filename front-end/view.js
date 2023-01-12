@@ -125,7 +125,15 @@ class View {
     let label = document.createElement('label');
     label.setAttribute('for', param.name);
     label.setAttribute('class', 'param-label');
-    label.innerHTML = param.name + ' = ';
+    if (param.required) {
+      label.innerHTML += '*';
+    }
+    label.innerHTML += param.name + ' = ';
+    // if the param is required, add an asterisk to the label
+
+    //add param desctiption to label title
+    label.setAttribute('title', param.description);
+
     let input = document.createElement('input');
     input.setAttribute('type', 'text');
     input.setAttribute('id', param.name);
