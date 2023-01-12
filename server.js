@@ -4,7 +4,10 @@ import SwaggerParser from '@apidevtools/swagger-parser';
 import fs from 'fs';
 
 const app = express();
-const port = 3000;
+let port = process.env.PORT;
+if (port == null || port == '') {
+  port = 3000;
+}
 const __dirname = process.cwd();
 let data = {};
 
@@ -12,9 +15,9 @@ let url =
   'https://raw.githubusercontent.com/googlemaps/openapi-specification/main/dist/google-maps-platform-openapi3.json';
 
 //
-// app.listen(port, () => {
-//   console.log(`Example app listening at http://localhost:${port}`);
-// });
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`);
+});
 // serve the front-end folder as static files
 app.use(express.static('front-end'));
 
