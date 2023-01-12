@@ -2,6 +2,7 @@
   --main-bg-color: white;
   --input-field-bg-color: #eeeeee;
   --darker-bg-color: #e8eaed;
+  --lighter-bg-color: #eeeeff;
 }
 
 body {
@@ -45,7 +46,7 @@ body {
 }
 
 .request {
-  background-color: #f5f5fc;
+  background-color: var(--lighter-bg-color);
   margin-bottom: 20px;
 }
 
@@ -60,10 +61,12 @@ body {
 }
 .path {
   font-size: 1em;
+  padding: 2px;
 }
+
 .path:hover {
   cursor: pointer;
-  font-weight: bold;
+  background-color: var(--lighter-bg-color);
 }
 
 .grey {
@@ -112,6 +115,7 @@ label.param-label {
 .click {
   cursor: pointer;
   font-weight: normal;
+  display: inline;
 }
 
 .click:hover {
@@ -121,4 +125,10 @@ label.param-label {
 .delete {
   display: inline;
   float: right;
+}
+.delete:hover {
+  cursor: pointer;
+  font-weight: bold;
+}
+.controls {
 }

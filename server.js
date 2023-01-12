@@ -30,7 +30,6 @@ axios.get(url).then((response) => {
       console.error(err);
     } else {
       api = api;
-
       //write bundled data to front-end folder
       fs.writeFile('front-end/gmp-spec.json', JSON.stringify(api), (err) => {
         if (err) {

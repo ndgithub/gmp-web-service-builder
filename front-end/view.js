@@ -68,11 +68,35 @@ class View {
   }
 
   createRequestDiv(request) {
-    console.log('createRequestDiv');
     let requestDiv = document.createElement('div');
     requestDiv.setAttribute('class', 'request');
+
+    let headerDiv = document.createElement('div');
+    headerDiv.classList.add('class', 'header');
+
+    headerDiv.appendChild(this.createControlsDiv(request));
+
+    let urlDiv = document.createElement('div');
+    urlDiv.setAttribute('class', 'url');
+    // use the request.Id to create a request attribute on the urlDiv
+
+    urlDiv.setAttribute(
+      'data-request-index',
+      this.state.requests.indexOf(request)
+    );
+
+    urlDiv.innerHTML = request.getCompleteUrl();
+
+    headerDiv.appendChild(urlDiv);
     console.log(requestDiv);
-    //create a div to hold the triangle and the name
+
+    requestDiv.appendChild(headerDiv);
+    return requestDiv;
+  }
+
+  createControlsDiv(request) {
+    let controlsDiv = document.createElement('div');
+    controlsDiv.setAttribute('class', 'controls');
     let clickDiv = document.createElement('div');
     clickDiv.setAttribute('class', 'click');
     let triangleDiv = document.createElement('div');
@@ -82,11 +106,8 @@ class View {
     } else {
       triangleDiv.innerHTML = '▶';
     }
-    //add trianlge div to click div
-    clickDiv.appendChild(triangleDiv);
 
-    let headerDiv = document.createElement('div');
-    headerDiv.classList.add('class', 'header');
+    clickDiv.appendChild(triangleDiv);
 
     let nameDiv = document.createElement('div');
     nameDiv.setAttribute('class', 'name');
@@ -96,32 +117,19 @@ class View {
     clickDiv.addEventListener('click', (e) =>
       this.controllerCallbacks.onNameClick(e, request)
     );
-    headerDiv.appendChild(clickDiv);
+
     // create a div that has an x to delete the reqeust when it is clicked
+
     let deleteDiv = document.createElement('div');
     deleteDiv.setAttribute('class', 'delete');
-    deleteDiv.innerHTML = 'x';
+    deleteDiv.innerHTML = 'X';
     deleteDiv.addEventListener('click', (e) => {
       this.controllerCallbacks.onDeleteClick(e, request);
     });
-    clickDiv.appendChild(deleteDiv);
 
-    let urlDiv = document.createElement('div');
-    urlDiv.setAttribute('class', 'url');
-    // use the request.Id to create a request attribute on the urlDiv
-    urlDiv.setAttribute(
-      'data-request-index',
-      this.state.requests.indexOf(request)
-    );
-
-    console.log(request.pathString);
-    urlDiv.innerHTML = request.getCompleteUrl();
-    console.log(request);
-    headerDiv.appendChild(urlDiv);
-    console.log(requestDiv);
-
-    requestDiv.appendChild(headerDiv);
-    return requestDiv;
+    controlsDiv.appendChild(clickDiv);
+    controlsDiv.appendChild(deleteDiv);
+    return controlsDiv;
   }
 
   createParamDiv(param, request) {
