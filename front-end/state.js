@@ -17,9 +17,20 @@ class State {
   }
   addRequest(request) {
     this.requests.push(request);
+    // this.saveState();
   }
   setExcludedPaths(excludedPaths) {
     this.excludedPaths = excludedPaths;
   }
+  deleteRequest(request) {
+    let index = this.requests.indexOf(request);
+    this.requests.splice(index, 1);
+    // this.saveState();
+  }
+
+  // create a method that stores state in local storage
+  // saveState() {
+  //   localStorage.setItem('requests', JSON.stringify(this.requests));
+  // }
 }
 export { State };

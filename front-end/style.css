@@ -117,3 +117,8 @@ label.param-label {
 .click:hover {
   font-weight: bold;
 }
+
+.delete {
+  display: inline;
+  float: right;
+}

@@ -5,10 +5,11 @@ class View {
     this.requestsDiv = document.getElementById('requests');
     this.controllerCallbacks = {};
   }
-  loadCallbacks(onPathClick, onNameClick, onInputChange) {
+  loadCallbacks(onPathClick, onNameClick, onInputChange, onDeleteClick) {
     this.controllerCallbacks.pathClick = onPathClick;
     this.controllerCallbacks.onNameClick = onNameClick;
     this.controllerCallbacks.inputChange = onInputChange;
+    this.controllerCallbacks.onDeleteClick = onDeleteClick;
   }
 
   updatePathsUi() {
@@ -96,7 +97,14 @@ class View {
       this.controllerCallbacks.onNameClick(e, request)
     );
     headerDiv.appendChild(clickDiv);
-    // create a div to the left of nameDiv that will show a triangle pointing down if the request is open and a triangle pointing right if the request is closed
+    // create a div that has an x to delete the reqeust when it is clicked
+    let deleteDiv = document.createElement('div');
+    deleteDiv.setAttribute('class', 'delete');
+    deleteDiv.innerHTML = 'x';
+    deleteDiv.addEventListener('click', (e) => {
+      this.controllerCallbacks.onDeleteClick(e, request);
+    });
+    clickDiv.appendChild(deleteDiv);
 
     let urlDiv = document.createElement('div');
     urlDiv.setAttribute('class', 'url');

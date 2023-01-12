@@ -13,7 +13,8 @@ class Controller {
     this.view.loadCallbacks(
       this.onPathClick.bind(this),
       this.onNameClick.bind(this),
-      this.onInputChange.bind(this)
+      this.onInputChange.bind(this),
+      this.onDeleteClick.bind(this)
     );
     this.view.updatePathsUi();
   }
@@ -44,6 +45,12 @@ class Controller {
 
     console.log(this.state.requests);
     this.view.updateRequestActualUrl(request);
+  }
+
+  onDeleteClick(e, request) {
+    console.log('delete clicked');
+    this.state.deleteRequest(request);
+    this.view.updateRequestsUi();
   }
 }
 

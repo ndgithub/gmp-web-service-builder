@@ -22,6 +22,17 @@ function main() {
       }
       //Create model, controller, and view (MVC)
       let state = new State(includedPaths, excludedPaths);
+      // if (localStorage.getItem('requests')) {
+      //   let requests = JSON.parse(localStorage.getItem('requests'));
+      //   requests.forEach((request, i) => {
+      //     let path = state.paths.find((path) => path.name === request.path);
+      //     let newRequest = new Request(path, i);
+      //     newRequest.isOpen = request.isOpen;
+      //     newRequest.params = request.params;
+      //     state.addRequest(newRequest);
+      //   });
+      // }
+
       let view = new View(state);
       let controller = new Controller(state, view);
 
