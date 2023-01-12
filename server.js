@@ -12,9 +12,9 @@ let url =
   'https://raw.githubusercontent.com/googlemaps/openapi-specification/main/dist/google-maps-platform-openapi3.json';
 
 //
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
-});
+// app.listen(port, () => {
+//   console.log(`Example app listening at http://localhost:${port}`);
+// });
 // serve the front-end folder as static files
 app.use(express.static('front-end'));
 
